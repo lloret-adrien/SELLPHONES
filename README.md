@@ -1,1 +1,18 @@
-# SELLPHONES
+<p align="center">
+  <img src="logogif.gif" />
+ <img src="logotext.png" />
+</p>
+
+# Site e-commerce d'achats/reventes de téléphones mobiles
+### Réalisé dans le cadre d'un projet en groupe à l'IUT Montpellier-Sète – Département Informatique
+* **Sujet:** https://romainlebreton.github.io/ProgWeb-CoteServeur/projet.html
+* **Participants:** [Adrien Lloret](mailto:adrien.lloret@etu.umontpellier.fr), [Karim Derbali](mailto:karim.derbali@etu.umontpellier.fr), [Julien Benincasa](mailto:julien.benincasa@etu.umontpellier.fr) 
+
+# Quelques preview :
+
+<details>
+  <summary>Accueil</summary>
+  <img src="accueil.png"/>
+  <p>Le header change en fonction du rôle du client (connecté/visiteur/admin)</p>
+  <img src="navig.PNG"/>
+</details>
