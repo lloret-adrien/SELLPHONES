@@ -4,11 +4,11 @@
 </p>
 
 # Site e-commerce d'achats/reventes de téléphones mobiles
-### Réalisé dans le cadre d'un projet en groupe à l'IUT Montpellier-Sète – Département Informatique <font color="green"> (en cours)</font>
+### Réalisé dans le cadre d'un projet en groupe à l'IUT Montpellier-Sète – Département Informatique
 * **Sujet:** https://romainlebreton.github.io/ProgWeb-CoteServeur/projet.html
 * **Participants:** [Adrien Lloret](mailto:adrien.lloret@etu.umontpellier.fr), [Karim Derbali](mailto:karim.derbali@etu.umontpellier.fr), [Julien Benincasa](mailto:julien.benincasa@etu.umontpellier.fr) 
 
-## Quelques preview :
+## Quelques preview : (développement en cours)
 
 <details>
   <summary>Accueil</summary>
