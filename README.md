@@ -16,3 +16,10 @@
   <p>Le header change en fonction du rôle du client (connecté/visiteur/admin)</p>
   <img src="navig.PNG"/>
 </details>
+
+<details>
+  <summary>Dashboard Admin</summary>
+  <img src="adminpage.png"/>
+  <p>Top vendeurs : affiche seulement les 10 premiers</p>
+  <p>Historique des ventes : affiche seulement les 10 dernières ventes</p>
+</details>
