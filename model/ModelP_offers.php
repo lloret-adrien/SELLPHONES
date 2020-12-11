@@ -48,201 +48,21 @@ class ModelP_offers extends Model{
     }
   }
 
-  public static function getByMarque($m) {
+  public static function getBy($data){
     try{
-      $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE marque=:marq");
-      $values = array(
-        "marq" => $m
-      );
-      $rep->execute($values);
-      $offers = $rep->fetchAll(PDO::FETCH_OBJ);
-      $tab = array();
-      foreach ($offers as $o) {
-        $tr = new ModelP_offers();
-        $tr->set("offer_id",$o->offer_id);
-        $tr->set("user_id",$o->user_id);
-        $tr->set("marque",$o->marque);
-        $tr->set("modele",$o->modele);
-        $tr->set("couleur",$o->couleur);
-        $tr->set("prix",$o->prix);
-        $tr->set("description",$o->description);
-        $tr->set("photo",$o->photo);
-        $tr->set("stockage",$o->stockage);
-        $tr->set("etat",$o->etat);
-        $tr->set("date",$o->date);
-        $tab[]=$tr;
+      $setters = "";
+      foreach ($data as $cle => $valeur) {
+        if($cle=="prix"){
+          $setters = $setters . "prix >= " . $data["$cle"][0] . " AND prix <= " . $data["$cle"][1] . " AND";
+        }else {
+          $setters = $setters . "$cle = '$valeur' AND";
+        }
       }
-      return $tab;
-    } catch(PDOException $e) {
-      die();
-    }
-  }
-
-  public static function getByColor($c) {
-    try{
-      $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE couleur=:cl");
-      $values = array(
-        "cl" => $c
-      );
-      $rep->execute($values);
-      $offers = $rep->fetchAll(PDO::FETCH_OBJ);
-      $tab = array();
-      foreach ($offers as $o) {
-        $tr = new ModelP_offers();
-        $tr->set("offer_id",$o->offer_id);
-        $tr->set("user_id",$o->user_id);
-        $tr->set("marque",$o->marque);
-        $tr->set("modele",$o->modele);
-        $tr->set("couleur",$o->couleur);
-        $tr->set("prix",$o->prix);
-        $tr->set("description",$o->description);
-        $tr->set("photo",$o->photo);
-        $tr->set("stockage",$o->stockage);
-        $tr->set("etat",$o->etat);
-        $tr->set("date",$o->date);
-        $tab[]=$tr;
+      if(isset($_SESSION["login"]) && !array_key_exists("user_id",$data)){
+        $setters = $setters . " user_id != " . $_SESSION["login"] ." AND";
       }
-      return $tab;
-    } catch(PDOException $e) {
-      die();
-    }
-  }
-
-  public static function getMyOffers($login) {
-    try{
-      $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE user_id=:user");
-      $values = array(
-        "user" => $login
-      );
-      $rep->execute($values);
-      $offers = $rep->fetchAll(PDO::FETCH_OBJ);
-      $tab = array();
-      foreach ($offers as $o) {
-        $tr = new ModelP_offers();
-        $tr->set("offer_id",$o->offer_id);
-        $tr->set("user_id",$o->user_id);
-        $tr->set("marque",$o->marque);
-        $tr->set("modele",$o->modele);
-        $tr->set("couleur",$o->couleur);
-        $tr->set("prix",$o->prix);
-        $tr->set("description",$o->description);
-        $tr->set("photo",$o->photo);
-        $tr->set("stockage",$o->stockage);
-        $tr->set("etat",$o->etat);
-        $tr->set("date",$o->date);
-        $tab[]=$tr;
-      }
-      return $tab;
-    } catch(PDOException $e) {
-      die();
-    }
-  }
-
-  public static function getByPrice($d,$f) {
-    try{
-      $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE prix>=:min AND prix<:max");
-      $values = array(
-        "min" => $d,
-        "max" => $f
-      );
-      $rep->execute($values);
-      $offers = $rep->fetchAll(PDO::FETCH_OBJ);
-      $tab = array();
-      foreach ($offers as $o) {
-        $tr = new ModelP_offers();
-        $tr->set("offer_id",$o->offer_id);
-        $tr->set("user_id",$o->user_id);
-        $tr->set("marque",$o->marque);
-        $tr->set("modele",$o->modele);
-        $tr->set("couleur",$o->couleur);
-        $tr->set("prix",$o->prix);
-        $tr->set("description",$o->description);
-        $tr->set("photo",$o->photo);
-        $tr->set("stockage",$o->stockage);
-        $tr->set("etat",$o->etat);
-        $tr->set("date",$o->date);
-        $tab[]=$tr;
-      }
-      return $tab;
-    } catch(PDOException $e) {
-      die();
-    }
-  }
-
-  public static function getBySelection($m,$c,$min,$max) {
-    try{
-      if($m=='null' && $c=='null' && $min!=0 && $max!=0){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE prix>=:min AND prix<:max");
-        $values = array(
-        "min" => $min,
-        "max" => $max
-      );
-      } elseif($c=='null' && $min==0 && $max==999999 && $m != 'null'){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE marque=:marq");
-        $values = array(
-        "marq" => $m
-      );
-      } elseif ($m=='null' && $min==0 && $max==999999 && $c != 'null'){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE couleur=:cl");
-        $values = array(
-        "cl" => $c
-      );
-      }elseif ($m=='null' && $c=='null' && $min!=0 && $max==999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE prix>=:min");
-        $values = array(
-        "min" => $min
-      );
-      }elseif ($m=='null' && $c=='null' && $min==0 && $max!=999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE prix<:max");
-        $values = array(
-        "max" => $max
-      );
-      }elseif ($m!='null' && $c!='null' && $min==0 && $max==999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE marque=:marq AND couleur=:cl");
-        $values = array(
-        "cl" => $c,
-        "marq" => $m
-      );
-      }elseif ($m!='null' && $c=='null' && $min!=0 && $max!=999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE marque=:marq AND prix>=:min AND prix<:max");
-        $values = array(
-        "marq" => $m,
-        "min" => $min,
-        "max" => $max
-      );
-      }elseif ($m=='null' && $c!='null' && $min!=0 && $max!=999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE couleur=:cl AND prix>=:min AND prix<:max");
-        $values = array(
-        "cl" => $c,
-        "min" => $min,
-        "max" => $max
-      );
-      }elseif ($m=='null' && $c!='null' && $min!=0 && $max==999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE couleur=:cl AND prix>=:min");
-        $values = array(
-        "cl" => $c,
-        "min" => $min,
-      );
-      }elseif ($m=='null' && $c!='null' && $min==0 && $max!=999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE couleur=:cl AND prix<:max");
-        $values = array(
-        "cl" => $c,
-        "max" => $max
-      );
-      }elseif ($m!='null' && $c=='null' && $min==0 && $max!=999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE marque=:marq AND prix<:max");
-        $values = array(
-        "marq" => $m,
-        "max" => $max
-      );
-      }elseif ($m!='null' && $c=='null' && $min!=0 && $max==999999){
-        $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE marque=:marq AND prix>=:min");
-        $values = array(
-        "marq" => $m,
-        "min" => $min
-      );
-      }
-      $rep->execute($values);
+      $set = rtrim($setters,"AND");
+      $rep = Model::$pdo->query("SELECT * FROM p_offers WHERE $set AND quantite>0");
       $offers = $rep->fetchAll(PDO::FETCH_OBJ);
       $tab = array();
       foreach ($offers as $o) {
@@ -319,7 +139,7 @@ class ModelP_offers extends Model{
         $req->execute(array(
           'id' => $offer_id));
         $result = $req->fetch(PDO::FETCH_ASSOC);
-        if($result>0){
+        if($result["quantite"]>0){
           $b = true;
         }
     }catch(PDOException $e) {

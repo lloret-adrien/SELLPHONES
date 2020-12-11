@@ -48,6 +48,15 @@
 											</button>
 										</div>';
 				unset($_SESSION["not_connected"]);
+			}else if (isset($_SESSION["stockExhausted"])) {
+				echo '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+											<span class="badge badge-pill badge-danger">Erreur</span>
+											Cette offre n\'est plus disponible pour le moment
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>';
+				unset($_SESSION["stockExhausted"]);
 			}else if(isset($_SESSION["buy_complete"])) {
 				echo '<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
 											<span class="badge badge-pill badge-success">Success</span>

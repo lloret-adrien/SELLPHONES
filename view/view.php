@@ -468,7 +468,7 @@ require $filepath;
 
         <ul>
           <li class="p-b-9">
-            <a href="#" class="s-text7">
+            <a href="index.php#text_search" class="s-text7">
               Recherche
             </a>
           </li>

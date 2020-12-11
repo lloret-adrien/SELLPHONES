@@ -11,39 +11,21 @@ class ControllerOffres{
         require_once File::build_path($arr);
     }
     public static function readMarque() {
-        if(isset($_GET["marque"])) {
-            $m = $_GET["marque"];
-        }else {
-            $m = "";
+        if(isset($_GET["marque"]) && !empty($_GET["marque"])) {
+            $m = array('marque'=>$_GET["marque"]);
+            $offres = ModelP_offers::getBy($m);
+            $arr = array('view','view.php');
+            $controller='offres';
+            $view='product';
+            $pagetitle='Boutique';
+            require_once File::build_path($arr);
         }
-    	$offres = ModelP_offers::getByMarque($m);
-        $arr = array('view','view.php');
-        $controller='offres';
-        $view='product';
-        $pagetitle='Boutique';
-        require_once File::build_path($arr);
+        else {
+            static::readAll();
+        }
     }
 
     public static function readPrix() {
-        if(isset($_GET["min"])) {
-            $min = $_GET["min"];
-        }else {
-            $min = "";
-        }
-        if(isset($_GET["max"])) {
-            $max = $_GET["max"];
-        }else {
-            $max = "";
-        }
-    	$offres = ModelP_offers::getByPrice($min,$max);
-        $arr = array('view','view.php');
-        $controller='offres';
-        $view='product';
-        $pagetitle='Boutique';
-        require_once File::build_path($arr);
-    }
-
-    public static function readByAll() {
         if(isset($_GET["min"])) {
             $min = $_GET["min"];
         }else {
@@ -52,19 +34,10 @@ class ControllerOffres{
         if(isset($_GET["max"])) {
             $max = $_GET["max"];
         }else {
-            $max = 999999;
+            $max = 9999;
         }
-        if(isset($_GET["couleur"])) {
-            $cl = $_GET["couleur"];
-        }else {
-            $cl = 'null';
-        }
-        if(isset($_GET["marque"])) {
-            $mq = $_GET["marque"];
-        }else {
-            $mq = 'null';
-        }
-    	$offres = ModelP_offers::getBySelection($mq,$cl,$min,$max);
+        $prix = array("prix"=>array($min,$max));      
+        $offres = ModelP_offers::getBy($prix);
         $arr = array('view','view.php');
         $controller='offres';
         $view='product';
@@ -73,22 +46,23 @@ class ControllerOffres{
     }
 
     public static function readColor() {
-        if(isset($_GET["couleur"])) {
-            $c = $_GET["couleur"];
-        }else {
-            $c = "";
+        if(isset($_GET["couleur"]) && !empty($_GET["couleur"])) {
+            $color = array('couleur'=>$_GET["couleur"]);
+            $offres = ModelP_offers::getBy($color);
+            $arr = array('view','view.php');
+            $controller='offres';
+            $view='product';
+            $pagetitle='Boutique';
+            require_once File::build_path($arr);
         }
-        $offres = ModelP_offers::getByColor($c);
-        $arr = array('view','view.php');
-        $controller='offres';
-        $view='product';
-        $pagetitle='Boutique';
-        require_once File::build_path($arr);
+        else {
+            static::readAll();
+        }
     }
     public static function myoffres() {
         if(isset($_SESSION["login"])) {
-            $l = $_SESSION["login"];
-            $offres = ModelP_offers::getMyOffers($l);
+            $l = array("user_id"=>$_SESSION["login"]);
+            $offres = ModelP_offers::getBy($l);
             $arr = array('view','view.php');
             $controller='utilisateur';
             $view='mesoffres';
@@ -119,7 +93,7 @@ class ControllerOffres{
         try {
             if(isset($_SESSION["login"]) AND isset($_GET["offre_id"]) AND !empty($_GET["offre_id"])) {
                 $o = ModelP_offers::select($_GET["offre_id"]);
-                if($o!=false && (ModelP_offers::isMyOffer($_GET["offre_id"]) OR isset($_SESSION["admin"]))) {
+                if($o!=false && (ModelP_offers::isMyOffer($_GET["offre_id"]) OR isset($_SESSION["admin"])) && ModelP_offers::isValid($_GET["offre_id"])) {
                     ModelP_offers::del($_GET["offre_id"]);
                     ModelP_offers::stats(2);
                     $_SESSION["retirer"]=1;
@@ -161,7 +135,7 @@ class ControllerOffres{
     public static function update() {
         if(isset($_SESSION["login"]) && isset($_GET["offre_id"]) && !empty($_GET["offre_id"])){
             $o = ModelP_offers::select($_GET["offre_id"]);
-            if($o==false OR (ModelP_offers::isMyOffer($_GET["offre_id"])==false && !isset($_SESSION["admin"]))){
+            if($o==false OR (ModelP_offers::isMyOffer($_GET["offre_id"])==false && !isset($_SESSION["admin"])) OR !ModelP_offers::isValid($_GET["offre_id"])){
                 static::readAll();
             }else {
                 $arr = array('view','view.php');
@@ -218,6 +192,7 @@ class ControllerOffres{
                         $_SESSION["add_panier"]=1;
                     }else {
                         //stock épuisé
+                        $_SESSION["stockExhausted"]=true;
                     }
                 }
             }

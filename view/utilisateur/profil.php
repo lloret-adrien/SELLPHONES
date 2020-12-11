@@ -1,10 +1,13 @@
 <div class="wrapper">
     <div class="picture">
       <img id='profil' src="http://www.weesk.com/wallpaper/celebrites-femmes/hilary-duff/hilary-duff-65-hilary-duff-celebrites-femmes.jpg" alt="pdp">
-      
+      <?php
+      if($right==true){
+      	echo'
       <a href="#" class="">
         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjAwJyBoZWlnaHQ9JzIwMCcgZmlsbD0iI2ZmZmZmZiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGQ9Ik00NDgsMTEyaC0zMmwtNjQtOTZIMjI0bC02NCw5NmgtMzJjMC0zNS4zNDQtMjguNjU2LTY0LTY0LTY0UzAsNzYuNjU2LDAsMTEydjY0djI1NmMwLDM1LjM0NCwyOC42NTYsNjQsNjQsNjRoMzg0ICBjMzUuMzQ0LDAsNjQtMjguNjU2LDY0LTY0VjE3NkM1MTIsMTQwLjY1Niw0ODMuMzQ0LDExMiw0NDgsMTEyeiBNODAsMjI0SDQ4Yy04Ljg0NCwwLTE2LTcuMTU2LTE2LTE2czcuMTU2LTE2LDE2LTE2aDMyICBjOC44NDQsMCwxNiw3LjE1NiwxNiwxNlM4OC44NDQsMjI0LDgwLDIyNHogTTY0LDE0NGMtMTcuNjcyLDAtMzItMTQuMzEzLTMyLTMyczE0LjMyOC0zMiwzMi0zMnMzMiwxNC4zMTMsMzIsMzJTODEuNjcyLDE0NCw2NCwxNDR6ICAgTTI4OCw0MzJjLTc5LjQwNiwwLTE0NC02NC41OTQtMTQ0LTE0NHM2NC41OTQtMTQ0LDE0NC0xNDRzMTQ0LDY0LjU5NCwxNDQsMTQ0UzM2Ny40MDYsNDMyLDI4OCw0MzJ6IE0zNjgsMjg4ICBjMCw0NC4xODgtMzUuODEzLDgwLTgwLDgwcy04MC0zNS44MTMtODAtODBzMzUuODEzLTgwLDgwLTgwUzM2OCwyNDMuODEzLDM2OCwyODh6Ij48L3BhdGg+PC9zdmc+">
-      </a>
+      </a>';}
+      ?>
     </div>
   
   <p>
