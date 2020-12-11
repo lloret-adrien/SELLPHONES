@@ -1,0 +1,99 @@
+.wrapper{
+  width:75%;
+  margin:0 auto;
+  margin-top:200px;
+  position:relative;
+}
+
+.wrapper p {
+  text-align: center;
+  display:block;
+  background-color: #f0f0f0;
+  padding:100px;
+  border-radius:10px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.picture{
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  width:200px;
+  height:200px;
+  border:10px solid #11111147;
+  overflow:hidden;
+  text-align:center;
+  margin:0 auto;
+  border-radius:50%;
+  position:absolute;
+  left:50%;
+  margin-left:-105px;
+  top:-150px;
+}
+
+.picture img {
+  height:100%;
+  display:block;
+}
+
+.picture a {
+  position: absolute;
+  top:100%;
+  width:40px;
+  height:40px;
+  margin-left:-25px;
+  left:50%;
+  transition: all ease 300ms;
+  opacity:0.8;
+}
+
+.picture:hover a{
+  top:70%;
+}
+
+#settings_profile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#settings_profile:hover {
+  cursor: pointer;
+}
+
+/* Suivi comandes */
+.container_commandes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commandes{
+  border: solid 2px #b9b9b9;
+  border-radius: 5px;
+  width: 65%;
+}
+
+.commandes div h5{
+  background-color: #f0f0f0;
+  border-top: solid 1px #8080803b;
+}
+
+.commandes div h5:hover {
+  background-color: #dcdcdc;
+  cursor: pointer;
+}
+
+.offer_li {
+  display: flex;
+  flex-direction: column;
+}
+
+.offer_li li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.offer_li li:last-child {
+  border-top: dashed 1px #8080805c;
+  -webkit-text-stroke: #6f6f6f;
+  -webkit-text-stroke-width: medium;
+}
