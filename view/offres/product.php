@@ -15,118 +15,6 @@
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
 					<div class="leftbar p-r-20 p-r-0-sm">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<form method="get" action="index.php?action=readByAll">
-      	<h4 class="m-text14 p-b-7">
-			Filtres
-		</h4>
-     	<div class="flex-m flex-w m-b-20">
-          <div class="s-text15 w-size15 t-center">
-              Marque
-          </div>
-          <div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-              <select class="selection-2" name="marque">
-                <option>Apple</option>
-                <option>Samsung</option>
-                <option>Huawei</option>
-                <option>Wiko</option>
-                <option>Autre</option>
-              </select>
-          </div>
-      	</div>
-      	
-      	<div class="bo4 of-hidden size15 m-b-20">
-          <input class="sizefull s-text7 p-l-22 p-r-22" type="number" id="prix" name="prix" placeholder="Prix de vente (€)" min="10">
-      	</div>
-
-      	<div class="filter-color p-t-22 p-b-50 bo3">
-              <div class="m-text15 p-b-12">
-                Couleur
-              </div>
-
-              <ul class="flex-w">
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="cyan">
-                  <label class="color-filter color-filter1" for="color-filter1"></label>
-                </li>
-
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="bleu">
-                  <label class="color-filter color-filter2" for="color-filter2"></label>
-                </li>
-
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="orange">
-                  <label class="color-filter color-filter3" for="color-filter3"></label>
-                </li>
-
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="rouge">
-                  <label class="color-filter color-filter4" for="color-filter4"></label>
-                </li>
-
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="beige">
-                  <label class="color-filter color-filter5" for="color-filter5"></label>
-                </li>
-
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="noir">
-                  <label class="color-filter color-filter6" for="color-filter6"></label>
-                </li>
-
-                <li class="m-r-10">
-                  <input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="gris">
-                  <label class="color-filter color-filter7" for="color-filter7"></label>
-                </li>
-              </ul>
-            </div>
-
-      <div class="w-size25">
-        <input class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4" type="submit" value="Rechercher"/>
-      </div>
-  </form>
-						
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
 						<h4 class="m-text14 p-b-7">
 							Marque
 						</h4>
@@ -139,13 +27,13 @@
 							</li>
 
 							<li class="p-t-4">
-								<a href="index.php?action=readMarque&marque=Apple" class="s-text13">
+								<a href="?action=readMarque&marque=Apple" class="s-text13">
 									Apple
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="index.php?action=readMarque&marque=Samsung" class="s-text13">
+								<a href="?action=readMarque&marque=Samsung" class="s-text13">
 									Samsung
 								</a>
 							</li>
@@ -162,7 +50,7 @@
 								</a>
 							</li>
 						</ul>
--->
+
 						<h4 class="m-text14 p-b-32">
 							Filtres
 						</h4>
@@ -391,10 +279,10 @@
 			skipValues[handle].innerHTML=Math.round(values[handle]);});
 	</script>-->
 	<script>
-		/*$(".m-r-10 input").click(function () {
+		$(".m-r-10 input").click(function () {
 			const color = $(this).attr('name');
   			document.location.href="index.php?action=readColor&couleur=" + color;
-		});*/
+		});
 
 		$("#search").click(function () {
 			var input = $(this).parent().children().first();

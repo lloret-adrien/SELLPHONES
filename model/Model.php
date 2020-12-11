@@ -149,13 +149,6 @@ class Model {
         $rep = Model::$pdo->query("SELECT COUNT(DISTINCT id_produit) FROM p_contient");
       }
       else if($b==2) {
-        /*$lundi = new DateTime();
-        $lundi->setTimestamp(strtotime('last Monday',time()));
-        $lundi = date_format($lundi, 'Y-m-d H:i:s');
-        $dimanche = new DateTime();
-        $dimanche->setTimestamp(strtotime('this Sunday',time()));
-        $dimanche = date_format($dimanche, 'Y-m-d H:i:s');*/
-
         $rep = Model::$pdo->query("SELECT COUNT(DISTINCT id_produit) FROM p_contient c JOIN p_commande p ON c.id_commande=p.id_commande WHERE DATEDIFF(NOW(),date_commande) < 7");
       }else if($b==3) {
         $rep = Model::$pdo->query("SELECT SUM(prix) FROM p_offers o JOIN p_contient c ON o.offer_id=c.id_produit");
@@ -206,6 +199,31 @@ class Model {
       }
       return $tab;
     }catch(PDOException $e) {
+      die();
+    }
+  }
+
+  public static function getPanier() {
+    try {
+      $sql = null;
+      if($_SESSION["panier"]!==array()) {
+        $sql = self::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
+      }
+      return $sql;
+    } catch(PDOException $e) {
+      die();
+    }
+  }
+
+  public static function prixPanier(){
+    try {
+      $prixPanier = 0;
+      if($_SESSION["panier"]!==array()) {
+        $sql = self::$pdo->query("SELECT SUM(prix) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
+        $prixPanier = $sql->fetch();
+      }
+      return $prixPanier;
+    } catch(PDOException $e) {
       die();
     }
   }

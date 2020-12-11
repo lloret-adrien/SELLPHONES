@@ -20,9 +20,8 @@ try {
 
   $products = array();
   if($_SESSION["panier"]!==array()) {
-    $sql = Model::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
-    $sql2 = Model::$pdo->query("SELECT SUM(prix) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
-    $prixPanier = $sql2->fetch();
+    $sql = Model::getPanier();
+    $prixPanier = Model::prixPanier();
     while ($rep = $sql->fetch()) {
                     $products[]='<li class="header-cart-item">
                           <div class="header-cart-item-img" id="' . $rep[0] .'">

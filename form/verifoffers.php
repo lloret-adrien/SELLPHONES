@@ -1,9 +1,6 @@
 <?php
 	//https://openclassrooms.com/forum/sujet/garder-champs-formulaire-si-erreur-de-saisie-74240
 	session_start();
-	if(!isset($_SESSION["login"])){
-		//return accueil
-	}
 	$_SESSION["erreur"]=$_POST;//var session qui stocke les données des champs du formulaire
 	$errors = array();
 

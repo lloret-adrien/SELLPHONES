@@ -195,6 +195,8 @@ class ControllerOffres{
     }
 
     public static function readPanier() {
+        $panier = ModelP_offers::getPanier();
+        $prixPanier = ModelP_offers::prixPanier();
         $arr = array('view','view.php');
         $controller='utilisateur';
         $view='panier';

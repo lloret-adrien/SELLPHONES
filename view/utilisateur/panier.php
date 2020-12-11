@@ -1,14 +1,3 @@
-<?php
-try {
-	if($_SESSION["panier"]!==array()) {
-    	$sql = Model::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
-    	$sql2 = Model::$pdo->query("SELECT SUM(prix) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
-    	$prixPanier = $sql2->fetch();
-  	}
-} catch(PDOException $e) {
-  die();
-}
-?>
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background: linear-gradient(#3633ca, #9286d0);">
 		<h2 class="l-text2 t-center">
@@ -94,7 +83,7 @@ try {
 							<th class="column-6">Actions</th>
 						</tr>';
 						
-						while ($rep = $sql->fetch()) {
+						while ($rep = $panier->fetch()) {
 							$c = strtolower($rep[4]);
 							if($c =="cyan") {
 								$c = "1";

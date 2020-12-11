@@ -3,6 +3,7 @@ $arr = array('model','ModelP_users.php');
 require_once File::build_path($arr);
 class ControllerUtilisateur{
 
+    //on aurait du le faire en 1 fonction
     public static function login() {
         if(!isset($_SESSION["login"])) {
             $arr = array('view','view.php');
@@ -59,12 +60,12 @@ class ControllerUtilisateur{
 
     public static function readAll() {
         if(ModelP_users::isAdmin()) {
-        $users = ModelP_users::selectAll();
-        $arr = array('view', 'view.php');
-        $controller='utilisateur';
-        $view='list';
-        $pagetitle='Utilisateurs';
-        require_once File::build_path($arr);
+            $users = ModelP_users::selectAll();
+            $arr = array('view', 'view.php');
+            $controller='utilisateur';
+            $view='list';
+            $pagetitle='Utilisateurs';
+            require_once File::build_path($arr);
         }else{
             $DS = DIRECTORY_SEPARATOR;
             header("Location: ." . $DS . "index.php");
@@ -88,60 +89,5 @@ class ControllerUtilisateur{
         }
         static::readAll();
     }
-
-    /*public static function read($login) {
-    	$u = ModelUtilisateur::select($login);
-    	//vérifié si le login existe
-    	if($u==false) {
-        	$controller='utilisateur';
-            $arr = array('view','view.php');
-            $view='error';
-            $pagetitle='Erreur';
-            require_once File::build_path($arr);
-    	} else {
-        	$controller='utilisateur';
-            $arr = array('view','view.php');
-            $pagetitle='Détail';
-            $view='detail';
-            require_once File::build_path($arr);
-    	}
-    }
-
-    public static function create() {
-        $arr = array('view','view.php');
-        $controller='utilisateur';
-        $view='update';
-        $pagetitle='Insertion';
-        $u = new ModelUtilisateur();
-        require_once File::build_path($arr);
-    }
-    public static function created($l,$n,$p) {
-        $utilisateur = new ModelUtilisateur($l,$n,$p);
-        $utilisateur->save();
-        $arr = array('view','view.php');
-        $view='created';
-        $pagetitle='Création';
-        $controller='utilisateur';
-        $user = ModelUtilisateur::selectAll();
-        require_once File::build_path($arr);
-    }
-
-    public static function update($login) {
-        $arr = array('view','view.php');
-        $controller='utilisateur';
-        $view='update';
-        $pagetitle='Mise à jour';
-        $u = ModelUtilisateur::select($login);
-        require_once File::build_path($arr);
-    }
-    public static function updated($l,$n,$p) {
-        $u = ModelUtilisateur::select($i);
-        $u->update($l,$n,$p);
-        $arr = array('view','view.php');
-        $view='updated';
-        $pagetitle='Mise à jour';
-        $controller='utilisateur';
-        require_once File::build_path($arr);
-    }*/
 }
 ?>
