@@ -26,12 +26,12 @@ class ControllerOffres{
     }
 
     public static function readPrix() {
-        if(isset($_GET["min"])) {
+        if(isset($_GET["min"]) && is_numeric($_GET["min"])) {
             $min = $_GET["min"];
         }else {
             $min = 0;
         }
-        if(isset($_GET["max"])) {
+        if(isset($_GET["max"]) && is_numeric($_GET["max"])) {
             $max = $_GET["max"];
         }else {
             $max = 9999;
@@ -122,6 +122,8 @@ class ControllerOffres{
         if(isset($_SESSION["login"])) {
             if(isset($_SESSION["create"])) {
                 $o = new ModelP_offers();
+                unset($_SESSION["create"]["controller"]);
+                unset($_SESSION["create"]["action"]);
                 $o->save($_SESSION["create"]);
                 unset($_SESSION["create"]);
                 ModelP_offers::stats(0);

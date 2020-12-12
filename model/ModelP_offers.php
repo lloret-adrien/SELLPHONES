@@ -51,18 +51,24 @@ class ModelP_offers extends Model{
   public static function getBy($data){
     try{
       $setters = "";
+      $keys = array();
+      $values = array();
       foreach ($data as $cle => $valeur) {
         if($cle=="prix"){
           $setters = $setters . "prix >= " . $data["$cle"][0] . " AND prix <= " . $data["$cle"][1] . " AND";
         }else {
-          $setters = $setters . "$cle = '$valeur' AND";
+          $setters = $setters . "$cle = :$cle AND";
+          array_push($keys, $cle);
+          array_push($values, $valeur);
         }
       }
       if(isset($_SESSION["login"]) && !array_key_exists("user_id",$data)){
         $setters = $setters . " user_id != " . $_SESSION["login"] ." AND";
       }
       $set = rtrim($setters,"AND");
-      $rep = Model::$pdo->query("SELECT * FROM p_offers WHERE $set AND quantite>0");
+      $arr = array_combine($keys, $values);
+      $rep = Model::$pdo->prepare("SELECT * FROM p_offers WHERE $set AND quantite>0");
+      $rep->execute($arr);
       $offers = $rep->fetchAll(PDO::FETCH_OBJ);
       $tab = array();
       foreach ($offers as $o) {
@@ -148,42 +154,6 @@ class ModelP_offers extends Model{
     return $b;
   }
 
-  public static function save($data) {
-    try {
-      $req = Model::$pdo->prepare("INSERT INTO p_offers VALUES('',:u,:marq,:mod,:c,:p,:d,null,:s,:e,NOW(),1)");
-      $req->execute(array(
-          'u' => $data["user_id"],
-          'marq' => $data["marque"],
-          'mod' => $data["modele"],
-          'c' => $data["couleur"],
-          'p' => $data["prix"],
-          'd' => $data["description"],
-          's' => $data["stockage"],
-          'e' => $data["etat"]
-        ));
-    } catch(PDOException $e) {
-      die();
-    }
-  }
-
-  public static function update($data) {
-    try {
-      $req = Model::$pdo->prepare("UPDATE p_offers SET marque=:marq,modele=:mod,couleur=:c,prix=:p,description=:d,stockage=:s,etat=:e WHERE offer_id=:value");
-      $req->execute(array(
-        'value' => $data["offer_id"],
-        'marq' => $data["marque"],
-        'mod' => $data["modele"],
-        'c' => $data["couleur"],
-        'p' => $data["prix"],
-        'd' => $data["description"],
-        's' => $data["stockage"],
-        'e' => $data["etat"]
-      ));
-    } catch(PDOException $e) {
-      die();
-    }
-  }
-
   public static function getHistoSales() {
     try {
       $sql = Model::$pdo->query("SELECT * FROM `p_contient` c JOIN `p_commande` p ON c.id_commande=p.id_commande JOIN `p_offers` o ON o.offer_id=c.id_produit ORDER BY `date_commande` DESC LIMIT 10");
@@ -192,7 +162,6 @@ class ModelP_offers extends Model{
       die();
     }
   }
-
 
   public static function getTopSellers() {
     try {

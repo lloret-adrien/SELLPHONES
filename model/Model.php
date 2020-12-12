@@ -98,49 +98,61 @@ class Model {
     }
   }
 
-  /*public static function update($data) {
+  public static function update($data) {
     try {
       $table_name = static::$object;
       $class_name = "Model" . ucfirst(strtolower($table_name));
       $primary_key = static::$primary;
       $setters = "";
-      $val = "";
-      if(array_key_exists("offer_id",$data)){
-        $val = "\"value\" => '" . $data["offer_id"] . "',";
-        unset($data["offer_id"]);
-      }
+      $keys = array();
+      $values = array();
       foreach ($data as $cle => $valeur) {
-        $setters = $setters . "$cle=:$cle,";
-        $val = $val . " \"$cle\" => '$valeur',";
+        if($cle==$primary_key){
+          array_push($keys, 'value');
+          array_push($values, $valeur);
+        }else {
+          $setters = $setters . " $cle = :$cle,";
+          array_push($keys, $cle);
+          array_push($values, $valeur);
+        }
       }
       $set = rtrim($setters,",");
-      $arr = rtrim($val,",");
+      $arr = array_combine($keys, $values);
       $req = Model::$pdo->prepare("UPDATE $table_name SET $set WHERE $primary_key=:value");
-      $req->execute(array($arr));
+      $req->execute($arr);
     } catch(PDOException $e) {
       die();
     }
-  }*/
+  }
 
-  /*public static function save($data) {
+  public static function save($data) {
     try {
       $table_name = static::$object;
       $class_name = "Model" . ucfirst(strtolower($table_name));
       $primary_key = static::$primary;
       $setters = "";
-      $val = "";
+      $k = "";
+      $keys = array();
+      $values = array();
       foreach ($data as $cle => $valeur) {
-        $setters += ":$cle,";
-        $val += "'$cle' => $valeur,";
+        $setters = $setters . " :$cle,";
+        $k = $k . " `$cle`,";
+        array_push($keys, $cle);
+        array_push($values, $valeur);
       }
       $set = rtrim($setters,",");
-      $arr = rtrim($val,",");
-      $req = Model::$pdo->prepare("INSERT INTO $table_name VALUES($setters)");
-      $req->execute(array($arr));
+      $k2 = rtrim($k,",");
+      $arr = array_combine($keys, $values);
+      if($table_name=="p_offers"){
+        $req = Model::$pdo->prepare("INSERT INTO $table_name ($k2,`date`) VALUES($set,NOW())");
+      }else {
+        $req = Model::$pdo->prepare("INSERT INTO $table_name ($k2) VALUES($set)");
+      }
+      $req->execute($arr);
     } catch(PDOException $e) {
       die();
     }
-  }*/
+  }
 
   public static function nbStats($b) {
     try{

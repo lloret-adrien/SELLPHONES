@@ -93,6 +93,10 @@ try {
 <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="css/util.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+  <link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.css">
+  <link rel="stylesheet" type="text/css" href="vendor/noui/nouislider.min.css">
 <!--===============================================================================================-->
 </head>
 <body class="animsition">

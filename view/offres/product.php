@@ -15,6 +15,7 @@
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
 					<div class="leftbar p-r-20 p-r-0-sm">
+
 						<h4 class="m-text14 p-b-7">
 							Marque
 						</h4>
@@ -55,7 +56,7 @@
 							Filtres
 						</h4>
 
-						<!--<div class="filter-price p-t-22 p-b-50 bo3">
+						<div class="filter-price p-t-22 p-b-50 bo3">
 							<div class="m-text15 p-b-17">
 								Prix
 							</div>
@@ -66,7 +67,7 @@
 
 							<div class="flex-sb-m flex-w p-t-16">
 								<div class="w-size11">
-									<button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+									<button id="price" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
 										Filtrer
 									</button>
 								</div>
@@ -75,7 +76,7 @@
 									Tranche : €<span id="value-lower">610</span> - €<span id="value-upper">980</span>
 								</div>
 							</div>
-						</div>-->
+						</div>
 
 						<div class="filter-color p-t-22 p-b-50 bo3">
 							<div class="m-text15 p-b-12">
@@ -84,37 +85,37 @@
 
 							<ul class="flex-w">
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="cyan">
+									<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="cyan" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="cyan"){echo "checked";}?>>
 									<label class="color-filter color-filter1" for="color-filter1"></label>
 								</li>
 
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="bleu">
+									<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="bleu" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="bleu"){echo "checked";}?>>
 									<label class="color-filter color-filter2" for="color-filter2"></label>
 								</li>
 
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="orange">
+									<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="orange" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="orange"){echo "checked";}?>>
 									<label class="color-filter color-filter3" for="color-filter3"></label>
 								</li>
 
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="rouge">
+									<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="rouge" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="rouge"){echo "checked";}?>>
 									<label class="color-filter color-filter4" for="color-filter4"></label>
 								</li>
 
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="beige">
+									<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="beige" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="beige"){echo "checked";}?>>
 									<label class="color-filter color-filter5" for="color-filter5"></label>
 								</li>
 
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="noir">
+									<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="noir" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="noir"){echo "checked";}?>>
 									<label class="color-filter color-filter6" for="color-filter6"></label>
 								</li>
 
 								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="gris">
+									<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="gris" <?php if(isset($_GET["couleur"])&& $_GET["couleur"]=="gris"){echo "checked";}?>>
 									<label class="color-filter color-filter7" for="color-filter7"></label>
 								</li>
 							</ul>
@@ -127,8 +128,7 @@
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button>
 						</div>
-
-						<?php
+							<?php
 							if(isset($_SESSION["search_error"])) {
 								echo '<div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
 											<span class="badge badge-pill badge-danger">Erreur</span>
@@ -154,16 +154,6 @@
 									<option>Récentes</option>
 									<option>Prix croissant</option>
 									<option>Prix décroissant</option>
-								</select>
-							</div>
-							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-								<select class="selection-2 select2-hidden-accessible" name="sorting">
-									<option>Prix</option>
-									<option>€0.00 - €50.00</option>
-									<option>€50.00 - €100.00</option>
-									<option>€100.00 - €150.00</option>
-									<option>€150.00 - €200.00</option>
-									<option>€200.00+</option>
 								</select>
 							</div>
 						</div>
@@ -251,33 +241,31 @@
 	<div id="dropDownSelect1"></div>
 	<div id="dropDownSelect2"></div>
 
-<!--===============================================================================================-->
+
 	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
-	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
+
 	<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
-	<script>$(".selection-1").select2({minimumResultsForSearch:20,dropdownParent:$('#dropDownSelect1')});$(".selection-2").select2({minimumResultsForSearch:20,dropdownParent:$('#dropDownSelect2')});
+	<script>
+		$(".selection-1").select2({minimumResultsForSearch:20,dropdownParent:$('#dropDownSelect1')});
+		$(".selection-2").select2({minimumResultsForSearch:20,dropdownParent:$('#dropDownSelect2')});
 	</script>
 	
-  <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
-  <script type="text/javascript" src="js/slick-custom.js"></script>
+  
   <script src="vendor/daterangepicker/daterangepicker.js"></script>
   <script src="vendor/daterangepicker/moment.min.js"></script>
 
-  <script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
 
+  	<!-- Tranche de prix -->
 	<script src="vendor/noui/nouislider.min.js"></script>
-	<!--<script>
+	<script src="vendor/noui/nouislider.js"></script>
+	<script>
 		var filterBar=document.getElementById('filter-bar');
-		noUiSlider.create(filterBar,{start:[50,200],connect:true,range:{'min':50,'max':200}});
+		noUiSlider.create(filterBar,{start:[10,999],connect:true,range:{'min':10,'max':999}});
 		var skipValues=[document.getElementById('value-lower'),document.getElementById('value-upper')];
 		filterBar.noUiSlider.on('update',function(values,handle){
 			skipValues[handle].innerHTML=Math.round(values[handle]);});
-	</script>-->
+	</script>
+
 	<script>
 		$(".m-r-10 input").click(function () {
 			const color = $(this).attr('name');
@@ -290,6 +278,12 @@
   			if(text!="") {
   				document.location.href="index.php?action=search&search=" + encodeURIComponent(text);
   			}
+		});
+
+		$("#price").click(function () {
+			var min = $('#value-lower').html();
+			var max = $('#value-upper').html();
+  			document.location.href="index.php?action=readPrix&min="+min+"&max="+max;
 		});
 	</script>
 
