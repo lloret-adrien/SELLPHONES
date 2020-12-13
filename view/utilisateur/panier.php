@@ -61,7 +61,13 @@
 				echo '<div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
 											<span class="badge badge-pill badge-success">Success</span>
 											Merci à vous !
-											<a href="#" class="alert-link"> suivre mes commandes</a>
+											<a href="'; 
+
+											if(isset($_SESSION["login"])){ 
+												echo "?&action=getProfil&controller=utilisateur&user_id=" . $_SESSION["login"];
+											} 
+
+											echo '#" class="alert-link"> suivre mes commandes</a>
 											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>

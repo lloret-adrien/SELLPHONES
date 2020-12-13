@@ -288,7 +288,7 @@
 	<script src="vendor/noui/nouislider.js"></script>
 	<script>
 		var filterBar=document.getElementById('filter-bar');
-		noUiSlider.create(filterBar,{start:[10,999],connect:true,range:{'min':10,'max':999}});
+		noUiSlider.create(filterBar,{start:[<?php if(isset($_GET["min"]) && is_numeric($_GET["min"])) {echo $_GET["min"];}else { echo '10';}?>,<?php if(isset($_GET["min"]) && is_numeric($_GET["max"])) {echo $_GET["max"];}else { echo '999';}?>],connect:true,range:{'min':10,'max':999}});
 		var skipValues=[document.getElementById('value-lower'),document.getElementById('value-upper')];
 		filterBar.noUiSlider.on('update',function(values,handle){
 			skipValues[handle].innerHTML=Math.round(values[handle]);});

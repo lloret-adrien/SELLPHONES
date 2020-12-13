@@ -98,7 +98,7 @@
     						$rep->execute($values);
     						$result = $rep->fetch(PDO::FETCH_ASSOC);
     						if(!empty($result)) {
-    							echo '<a href="index.php?controller=utilisateur&action=getProfil&controller=utilisateur&user_id=' . $result["id"] . '">' . $result["prenom"] . " " . $result["nom"] . "</a></div>";
+    							echo '<a href="index.php?action=getProfil&controller=utilisateur&user_id=' . $result["id"] . '">' . $result["prenom"] . " " . $result["nom"] . "</a></div>";
     							echo '<div class="flex-r-m flex-w p-t-10">
 						<div class="w-size16 flex-m flex-w">
 							<div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">

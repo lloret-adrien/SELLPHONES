@@ -246,43 +246,20 @@ class ControllerOffres{
         $nb = count($_SESSION["panier"]);
         if ($nb > 0 && isset($_SESSION["login"])){
             try {
-                $sql = Model::$pdo->query("SELECT COUNT(*) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).") AND quantite>0");
-                $rep = $sql->fetch();
-                if($nb != $rep[0]){//vérifie si les offres sont toujours disponible
+                $i = ModelP_offers::nbProductsValid();
+                if($nb != $i){//vérifie si les offres sont toujours disponible
                     static::readPanier();
                 }else {
                     //on récupère les offres
-                    $sql = Model::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
-
+                    $sql = ModelP_offers::getPanier();
                     while($rep = $sql->fetch()) {//on enlève les offres qui appartienent au client
-                        if(in_array($rep[1],$_SESSION['panier'])) {
+                        if(ModelP_offers::isMyOffer($rep[0])) {
                             unset($_SESSION["panier"][array_search($rep[1], $_SESSION["panier"])]);
                             $_SESSION["buyError"]=true;
                         }
                     }
-
                     if(!isset($_SESSION["buyError"])) {
-                        //on récupère encore les offres
-                        $sql = Model::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION['panier']).")");
-                        //on diminue la quantite de stock de chaques offres
-                        $req = Model::$pdo->query("UPDATE `p_offers` SET quantite=quantite-1 WHERE `offer_id` IN (".implode(',',$_SESSION['panier']).")");
-                        //ajouter la commande
-                        $req = Model::$pdo->prepare("INSERT INTO `p_commande` (`id_commande`, `id_client`,`date_commande`) VALUES ('',:id,NOW())");
-                        $req->execute(array("id"=>$_SESSION["login"]));
-                        //récupérer l'id de la commande
-                        $req = Model::$pdo->prepare("SELECT `id_commande` FROM `p_commande` WHERE `id_client`=:id ORDER BY `date_commande` LIMIT 1");
-                        $req->execute(array("id"=>$_SESSION["login"]));
-                        $id_c = $req->fetch();
-                        //boucle pour ajouter chaque produit dans la commande
-                        while($rep = $sql->fetch()){
-                            $req = Model::$pdo->prepare("INSERT INTO `p_contient` (`id_commande`,`id_produit`,`quantite`) VALUES (:idc,:idp,:qte)");
-                            $values = array(
-                                "idc" => $id_c[0],
-                                "idp" => $rep[0],
-                                "qte" => '1'
-                            );
-                            $req->execute($values);
-                        }
+                        ModelP_offers::startCommande();
                         //vider le panier
                         $_SESSION["buy_complete"]=true;
                         static::deletePanier();

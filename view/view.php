@@ -9,7 +9,7 @@ try {
   }
   else
   {
-    $l = "getProfil&controller=utilisateur&user_id=" . $_SESSION["login"];
+    $l = "getProfil&user_id=" . $_SESSION["login"];
     $rep = Model::$pdo->prepare("SELECT * FROM p_users WHERE id=:id LIMIT 1");
     $values = array(
       "id" => $_SESSION["login"]
@@ -61,7 +61,8 @@ try {
           <link href="vendor/wow/animate.css" rel="stylesheet" media="all">';
   }elseif ($pagetitle=="Profil") {
     echo '<link href="css/profil.css" rel="stylesheet" media="all">';
-  }?>
+  }
+  ?>
   <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 <!--===============================================================================================-->
   <link rel="icon" type="image/png" href="images/icons/favicon.png"/>

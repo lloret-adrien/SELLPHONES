@@ -219,7 +219,7 @@ class Model {
     try {
       $sql = null;
       if($_SESSION["panier"]!==array()) {
-        $sql = self::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
+        $sql = self::$pdo->query("SELECT * FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).") AND quantite>0");
       }
       return $sql;
     } catch(PDOException $e) {
@@ -231,10 +231,53 @@ class Model {
     try {
       $prixPanier = 0;
       if($_SESSION["panier"]!==array()) {
-        $sql = self::$pdo->query("SELECT SUM(prix) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).")");
+        $sql = self::$pdo->query("SELECT SUM(prix) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).") AND quantite>0");
         $prixPanier = $sql->fetch();
       }
       return $prixPanier;
+    } catch(PDOException $e) {
+      die();
+    }
+  }
+
+  public static function nbProductsValid() {
+    //retourne le nombre de produits valide qui sont dans le panier
+    try {
+      $nb = 0;
+      if($_SESSION["panier"]!==array()) {
+        $sql = self::$pdo->query("SELECT COUNT(*) FROM `p_offers` WHERE `offer_id` IN (".implode(',',$_SESSION["panier"]).") AND quantite>0");
+        $rep = $sql->fetch();
+        $nb = $rep[0];
+      }
+      return $nb;
+    } catch(PDOException $e) {
+      die();
+    }
+  }
+
+  public static function startCommande() {
+    try {
+      //on récupère encore les offres
+      $sql = self::getPanier();
+      //on diminue la quantite de stock de chaques offres
+      $req = self::$pdo->query("UPDATE `p_offers` SET quantite=quantite-1 WHERE `offer_id` IN (".implode(',',$_SESSION['panier']).") AND quantite>0");
+      //ajouter la commande
+      $req = self::$pdo->prepare("INSERT INTO `p_commande` (`id_commande`, `id_client`,`date_commande`) VALUES ('',:id,NOW())");
+      $req->execute(array("id"=>$_SESSION["login"]));
+      //récupérer l'id de la commande
+      $req = self::$pdo->prepare("SELECT `id_commande` FROM `p_commande` WHERE `id_client`=:id ORDER BY `date_commande` DESC LIMIT 1");
+      $req->execute(array("id"=>$_SESSION["login"]));
+      $id_c = $req->fetch();
+      //boucle pour ajouter chaque produit dans la commande
+      while($rep = $sql->fetch()){
+        $req = self::$pdo->prepare("INSERT INTO `p_contient` (`id_commande`,`id_produit`,`quantite`) VALUES (:idc,:idp,:qte)");
+        $values = array(
+            "idc" => $id_c[0],
+            "idp" => $rep[0],
+            "qte" => '1'
+        );
+        $req->execute($values);
+      }
     } catch(PDOException $e) {
       die();
     }
