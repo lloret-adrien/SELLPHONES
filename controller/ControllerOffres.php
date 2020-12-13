@@ -24,6 +24,20 @@ class ControllerOffres{
             static::readAll();
         }
     }
+    public static function readEtat() {
+        if(isset($_GET["etat"]) && !empty($_GET["etat"])) {
+            $m = array('etat'=>$_GET["etat"]);
+            $offres = ModelP_offers::getBy($m);
+            $arr = array('view','view.php');
+            $controller='offres';
+            $view='product';
+            $pagetitle='Boutique';
+            require_once File::build_path($arr);
+        }
+        else {
+            static::readAll();
+        }
+    }
 
     public static function readPrix() {
         if(isset($_GET["min"]) && is_numeric($_GET["min"])) {

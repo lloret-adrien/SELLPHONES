@@ -22,31 +22,32 @@
 
 						<ul class="p-b-54">
 							<li class="p-t-4">
-								<a href="index.php" class="s-text13 active1">
+								<a href="index.php" class="s-text13 
+								<?php if(!isset($_GET["marque"])){ echo ' active1';}?>">
 									Toutes
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="?action=readMarque&marque=Apple" class="s-text13">
+								<a href="?action=readMarque&marque=Apple" class="s-text13 <?php if(isset($_GET["marque"]) && $_GET["marque"]=="Apple"){ echo ' active1';}?>">
 									Apple
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="?action=readMarque&marque=Samsung" class="s-text13">
+								<a href="?action=readMarque&marque=Samsung" class="s-text13 <?php if(isset($_GET["marque"]) && $_GET["marque"]=="Samsung"){ echo ' active1';}?>">
 									Samsung
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="index.php?action=readMarque&marque=Huawei" class="s-text13">
+								<a href="index.php?action=readMarque&marque=Huawei" class="s-text13 <?php if(isset($_GET["marque"]) && $_GET["marque"]=="Huawei"){ echo ' active1';}?>">
 									Huawei
 								</a>
 							</li>
 
 							<li class="p-t-4">
-								<a href="index.php?action=readMarque&marque=Wiko" class="s-text13">
+								<a href="index.php?action=readMarque&marque=Wiko" class="s-text13 <?php if(isset($_GET["marque"]) && $_GET["marque"]=="Wiko"){ echo ' active1';}?>">
 									Wiko
 								</a>
 							</li>
@@ -121,6 +122,33 @@
 							</ul>
 						</div>
 
+					<div class="p-t-22 bo3">
+						<div class="m-text15 p-b-12">
+							État
+						</div>
+
+						<ul class="p-b-54">
+							<li class="p-t-4">
+								<a href="?action=readEtat&etat=Abîmé" class="s-text13 
+								<?php if(isset($_GET["etat"]) && $_GET["etat"]=="Abîmé"){ echo ' active1';}?>">
+									Abîmé
+								</a>
+							</li>
+
+							<li class="p-t-4">
+								<a href="?action=readEtat&etat=Bon état" class="s-text13 <?php if(isset($_GET["etat"]) && $_GET["etat"]=="Bon état"){ echo ' active1';}?>">
+									Bon état
+								</a>
+							</li>
+
+							<li class="p-t-4">
+								<a href="?action=readEtat&etat=Comme neuf" class="s-text13 <?php if(isset($_GET["etat"]) && $_GET["etat"]=="Comme neuf"){ echo ' active1';}?>">
+									Comme neuf
+								</a>
+							</li>
+						</ul>
+					</div>
+
 						<div class="search-product pos-relative bo4 of-hidden">
 							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Rechercher..." id="text_search">
 
@@ -148,7 +176,7 @@
 					<div class="flex-sb-m flex-w p-b-35">
 						<div class="flex-w">
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-								<select class="selection-2" name="sorting">
+								<select class="selection-2" name="sorting" disabled>
 									<option>Par default</option>
 									<option>Anciennes</option>
 									<option>Récentes</option>
