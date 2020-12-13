@@ -27,6 +27,8 @@
   left:50%;
   margin-left:-105px;
   top:-150px;
+  display: flex;
+  justify-content: center;
 }
 
 .picture img {

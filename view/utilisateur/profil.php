@@ -1,6 +1,6 @@
 <div class="wrapper">
     <div class="picture">
-      <img id='profil' src="http://www.weesk.com/wallpaper/celebrites-femmes/hilary-duff/hilary-duff-65-hilary-duff-celebrites-femmes.jpg" alt="pdp">
+      <img id='profil' src="./images/icons/incognito.png" alt="pdp">
       <?php
       if($right==true){
       	echo'
