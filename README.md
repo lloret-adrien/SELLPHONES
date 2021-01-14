@@ -8,7 +8,7 @@
 * **Sujet:** https://romainlebreton.github.io/ProgWeb-CoteServeur/projet.html
 * **Participants:** [Adrien Lloret](mailto:adrien.lloret@etu.umontpellier.fr), [Karim Derbali](mailto:karim.derbali@etu.umontpellier.fr), [Julien Benincasa](mailto:julien.benincasa@etu.umontpellier.fr) 
 
-## Quelques preview : (développement en cours)
+## Quelques preview :
 
 <details>
   <summary>Accueil</summary>
@@ -23,3 +23,4 @@
   <p>Top vendeurs : affiche seulement les 10 premiers</p>
   <p>Historique des ventes : affiche seulement les 10 dernières ventes</p>
 </details>
+
