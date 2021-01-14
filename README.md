@@ -24,3 +24,8 @@
   <p>Historique des ventes : affiche seulement les 10 dernières ventes</p>
 </details>
 
+<details>
+  <summary>Connexion/Inscription</summary>
+  <img src="login.png"/>
+  <p>Validation du compte par email</p>
+</details>
