@@ -33,5 +33,6 @@
 <details>
   <summary>Mes offres</summary>
   <img src="offers.png"/>
-  <img src="offers.png"/>
+  <p>Formulaire pour ajouter/modifier une offre</p>
+  <img src="formo.png"/>
 </details>
