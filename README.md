@@ -36,3 +36,8 @@
   <p>Formulaire pour ajouter/modifier une offre</p>
   <img src="formo.PNG"/>
 </details>
+
+<details>
+  <summary>Page détails d'un produit</summary>
+  <img src="details.PNG"/>
+</details>
