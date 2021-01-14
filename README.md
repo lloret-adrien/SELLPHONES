@@ -26,13 +26,13 @@
 
 <details>
   <summary>Connexion/Inscription</summary>
-  <img src="login.png"/>
+  <img src="login.PNG"/>
   <p>Validation du compte par email</p>
 </details>
 
 <details>
   <summary>Mes offres</summary>
-  <img src="offers.png"/>
+  <img src="offers.PNG"/>
   <p>Formulaire pour ajouter/modifier une offre</p>
-  <img src="formo.png"/>
+  <img src="formo.PNG"/>
 </details>
