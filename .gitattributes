@@ -1,2 +1,4 @@
 *.py linguist-detectable=false
 *.less linguist-detectable=false
+fonts/* linguist-detectable=false
+vendor/* linguist-detectable=false
