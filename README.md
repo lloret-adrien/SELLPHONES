@@ -1,5 +1,4 @@
 <p align="center">
-  <img src="logogif.gif" />
  <img src="logotext.png" />
 </p>
 
@@ -26,7 +25,7 @@
 
 <details>
   <summary>Connexion/Inscription</summary>
-  <img src="login.PNG"/>
+  <img src="login.png"/>
   <p>Validation du compte par email</p>
 </details>
 
@@ -34,10 +33,10 @@
   <summary>Mes offres</summary>
   <img src="offers.PNG"/>
   <p>Formulaire pour ajouter/modifier une offre</p>
-  <img src="formo.PNG"/>
+  <img src="formo.png"/>
 </details>
 
 <details>
   <summary>Page détails d'un produit</summary>
-  <img src="details.PNG"/>
+  <img src="details.png"/>
 </details>
