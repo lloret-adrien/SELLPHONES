@@ -1,5 +1,7 @@
 *.py linguist-detectable=false
 *.less linguist-detectable=false
+*.css linguist-detectable=false
+*.scss linguist-detectable=false
 fonts/* linguist-detectable=false
 vendor/* linguist-detectable=false
 css/* linguist-detectable=false
